@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Prueba Select Texto</title>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/paletaColores.css"  media="screen,projection"/>
+   
+    <!-- Libreria utilizada para la conexion del Socket.io -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Librerias necesarias para el funcionamiento de la página -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- wysihtml core javascript with default toolbar functions --> 
+    <script src="js/wysihtml-toolbar.min.js"></script>
+    <script src="js/advanced_and_extended.js"></script>
+     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- rules defining tags, attributes and classes that are allowed -->
+      <script type="text/javascript">
+        var compromisos= 0;
+        var acuerdos = 0;
+        var dudas = 0;
+        var desacuerdos = 0;
+
+      </script>
+
+
+</head>
+
+<body class= "morado-claro">
+<nav  class="morado-rosado">
+  <ul id="slide-out" class="side-nav">
+    <li><a href="#!">First Sidebar Link</a></li>
+    <li><a href="#!">Second Sidebar Link</a></li>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <a class="collapsible-header">Dropdown<i class="mdi-navigation-arrow-drop-down"></i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li><a href="#!">First</a></li>
+              <li><a href="#!">Second</a></li>
+              <li><a href="#!">Third</a></li>
+              <li><a href="#!">Fourth</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li></li>
+    <br>
+    <div class="center-align"><img src="img/logo3.png" alt="" class="responsive-img adaptarLogo2"></div>
+  </ul>
+ <div class="menupad">
+    <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+    <a href="#" class="brand-logo"> <img src="img/logo4.png" alt="" class="responsive-img adaptarLogo"></a>  
+</div>
+      
+</nav>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large red">
+              <i class="large mdi-action-note-add"></i>
+            </a>
+            <ul>
+              <li><a class="btn-floating red"><i class="large mdi-editor-insert-chart"></i></a></li>
+              <li><a class="btn-floating yellow darken-1"><i class="large mdi-editor-format-quote"></i></a></li>
+              <li><a class="btn-floating green"><i class="large mdi-editor-publish"></i></a></li>
+              <li><a class="btn-floating blue"><i class="large mdi-editor-attach-file"></i></a></li>
+            </ul>
+          </div>
+    <br><br>
+
+ <div class="container blanco">
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Temario:</h4><br>
+                      <a  href="#" onclick="AgregarCampos();" class="btn-floating  waves-effect waves-light red"><i class="mdi-content-add"></i></a>
+                <div id="campos"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close wwaves-effect waves-light btn">Cerrar temario</a>
+    </div>
+  </div>
+
+  <br>
+      <div class="valign-wrapper">
+        <h4 class="valign" >Crear una nueva acta</h4>
+    </div>
+  
+       <form>
+        <div class="row well">
+          <h5 >Temario:</h5>
+          
+                <div class="col s2">
+                   <form id="form" name="form" method="post">  <a class="modal-trigger waves-effect waves-light btn" href="#modal1"><i class="fa fa-eye"></i> Ver</a>
+                </div>
+
+  <!--       <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="fa fa-eye"></i>Ver temario</div>
+              <div class="collapsible-body container">
+                 <a  href="#" onclick="AgregarCampos();" class="btn-floating  waves-effect waves-light red"><i class="mdi-content-add"></i></a>
+                <div id="campos" class="containTem"></div>
+          
+
+              </div>
+            </li>
+          </ul>-->
+                <div class="col s10">
+                <div class="col s8">
+             
+                          <div class="form-group">
+                          
+
+                                <div class="wrap">
+                       
+
+                                  <div class="ewrapper" contentEditable="false">
+                                    <div class="toolbar" style="display: none;">
+                                      <div class="block">
+                                        <a data-wysihtml5-command="bold" title="CTRL+B"><span class="fa fa-bold"></span></a>
+                                        <a data-wysihtml5-command="italic" title="CTRL+I"><span class="fa fa-italic"></span></a>
+                                        <a data-wysihtml5-command="underline" title="CTRL+U"><span class="fa fa-underline"></span></a>
+                                        <a data-wysihtml5-command="superscript" title="sup"><span class="fa fa-superscript"></span></a>
+                                        <a data-wysihtml5-command="subscript" title="sub"><span class="fa fa-subscript"></span></a>
+                                      </div>
+                                      <div class="block">
+                                        <a data-wysihtml5-command="createLink" title="Enlace"><span class="fa fa-link"></span></a>
+                                        <a data-wysihtml5-command="removeLink" title="Quitar enlace"><s></s><span class="fa fa-unlink"></span></a>
+                                        <a data-wysihtml5-command="insertImage" title="Insertar imagen"><span class="fa fa-file-image-o"></span></a>
+                                        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1">h1</a>
+                                        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">h2</a>
+                                        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3">h3</a>
+                                        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="p">p</a>
+                                        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="pre" title="Insertar cuadro"><span class="fa fa-square-o"></span></a>
+                                        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-blank-value="true" title="Texto plano">T</a>
+                                        <a data-wysihtml5-command="insertBlockQuote" title="BlockQuote">BQ</a>
+                                        <a data-wysihtml5-command="formatCode" data-wysihtml5-command-value="language-html" title="Insertar Código"><span class="fa fa-code"></span></a>
+                                      </div>
+                                      
+                                      <div class="block">
+                                        <a data-wysihtml5-command="fontSizeStyle" title="Tamaño letra"><span class="fa fa-text-height"></span></a>
+                                        <div data-wysihtml5-dialog="fontSizeStyle" style="display: none;">
+                                          Size:
+                                          <input type="text" data-wysihtml5-dialog-field="size" style="width: 60px;" value="" />
+                                          <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="block">
+                                        <a data-wysihtml5-command="insertUnOrderedList" title="Lista no ordenada"><span class="fa fa-list-ul"></span></a>
+                                        <a data-wysihtml5-command="insertOrderedList"  title="Lista numerada"><span class="fa fa-list-ol"></span></a>
+                                      </div>
+                                      <div class="block">
+                                        <a data-wysihtml5-command="outdentList">&lt;-</a>
+                                        <a data-wysihtml5-command="indentList">-&gt;</a>
+                                      </div>
+                                      <div class="block">
+                                        <a data-wysihtml5-command="justifyFull" title="Texto justificado"><span class="fa fa-align-justify"></span></a>
+                                      </div>
+
+                                      <div class="block">
+                                        <a data-wysihtml5-command="alignLeftStyle"title="Alinear izquierda"><span class="fa fa-align-left"></span></a>
+                                        <a data-wysihtml5-command="alignRightStyle"title="Alinear derecha"><span class="fa fa-align-right"></span></a>
+                                        <a data-wysihtml5-command="alignCenterStyle"title="Alinear centro"><span class="fa fa-align-center"></span></a>
+                                      </div>
+                                    
+                                      <div class="block">
+                                        <a data-wysihtml5-command="foreColorStyle">Color</a>
+                                        <div data-wysihtml5-dialog="foreColorStyle" style="display: none;">
+                                          Color:
+                                          <input type="text" data-wysihtml5-dialog-field="color" value="rgba(0,0,0,1)" />
+                                          <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="block">
+                                        <a data-wysihtml5-command="bgColorStyle">BG Color</a>
+                                        <div data-wysihtml5-dialog="bgColorStyle" style="display: none;">
+                                          Color:
+                                          <input type="text" data-wysihtml5-dialog-field="color" value="rgba(0,0,0,1)" />
+                                          <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="block">
+                                        <a data-wysihtml5-command="undo" title="Deshacer"><span class="fa fa-undo"></span></a>
+                                        <a data-wysihtml5-command="redo" title="Rehacer"><span class="fa fa-repeat"></span></a>
+                                      </div>
+                                    
+                                      <div class="block">
+                                        <a data-wysihtml5-action="change_view"title="Mostrar HTML"><span class="fa fa-html5"></span></a>
+                                      </div>
+                                    
+                                      <div data-wysihtml5-dialog="createLink" style="display: none;">
+                                        <label>
+                                          Link:
+                                          <input data-wysihtml5-dialog-field="href" value="http://">
+                                        </label>
+                                        <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+                                      </div>
+                                      <div data-wysihtml5-dialog="insertImage" style="display: none;">
+                                        <label>
+                                          Image:
+                                          <input data-wysihtml5-dialog-field="src" value="http://">
+                                        </label>
+                                        <label>
+                                          Align:
+                                          <select data-wysihtml5-dialog-field="className">
+                                            <option value="">default</option>
+                                            <option value="wysiwyg-float-left">left</option>
+                                            <option value="wysiwyg-float-right">right</option>
+                                          </select>
+                                        </label>
+                                        <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+                                      </div>
+                                    </div><!-- toolbar -->
+                            <div >
+                              <div class=" panel panel-primary">
+                                <div contenteditable class="tamano editable" id="inputText" placeholder="" ></div>
+                              </div>
+                                
+                            </div>
+                          </div>
+                       </div>
+                       
+                        </div>
+             </div>
+
+            <div class="col s4">
+              <!--   <textarea id="comp" class="form-control"  placeholder="" ></textarea>   -->
+                  <h6 class="alert alert-info"><FONT style="color:blue;"><span class="fa fa-clock-o"></FONT></span> Compromisos: </h6>
+                       <ul id="comp" class="collection">
+                       </ul>
+                  <br>
+                  <h6 class="alert alert-success"><FONT style="color:green;"><span class="fa fa-check-circle"></FONT></span> Acuerdos: </h6>
+                      <ul id="acuerdo" class="collection">
+                       </ul>
+                  <br>
+                  <h6 class="alert alert-warning"><FONT style="color:yellow;"><span class="fa fa-question-circle"></FONT></span> Dudas: </h6>
+                        <ul id="dudas" class="collection">
+                      </ul>
+                      
+                  <br>
+                  <h6 class="alert alert-danger"><FONT style="color:red;"><span class="fa  fa-exclamation-triangle"></FONT></span> Desacuerdos: </h6>
+                      <ul id="desacuerdos" class="collection">
+                      </ul>
+                
+            </div>
+         </div> 
+         </div>
+      
+
+
+     </form>
+
+</div>         
+    <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none" >
+        <li onClick=" GetSelectedTextComp()"><a tabindex="-1" href="#"> <FONT style="color:blue;"><span class="fa fa-clock-o"></FONT></span> Pasar a Compromisos</a></li>
+        <li onClick=" GetSelectedTextAcu()"><a tabindex="-1" href="#"><FONT style="color:green;"><span class="fa fa-check-circle"></FONT></span> Pasar a Acuerdos</a></li>
+        <li onClick=" GetSelectedTextDude()" ><a tabindex="-1" href="#"><FONT style="color:yellow;"><span class="fa fa-question-circle"></FONT></span> Pasar a Dudas</a></li>
+        <li class="divider"></li>
+        <li onClick=" GetSelectedTextDesacu()" ><a tabindex="-1" href="#"><FONT style="color:red;"><span class="fa  fa-exclamation-triangle"></FONT></span> Pasar a Desacuerdos</a></li>
+    </ul>
+  
+<script type="text/javascript">
+    var nextinput = 0;
+    function AgregarCampos(){
+    nextinput++;
+
+
+    campo = '<div id="rut'+nextinput+'"><div class="row"><div class="input-field "><input  type="text" class="validate" id="campo' + nextinput + '"&nbsp; name="campo' + nextinput + '"&nbsp;><label for="icon_prefix">Tema '+ nextinput+'</label></div></div></form></div>';
+    $("#campos").append(campo);
+    }
+     $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+
+     $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+          
+    </script>
+<script type="text/javascript">
+
+
+         function GetSelectedTextComp () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                    // sel is a string in Firefox and Opera, id="icon_prefix"
+                    // and a selectionRange object in Google Chrome, Safari and IE from version 9 campo = '<li id="rut'+nextinput+'">Tema: '+nextinput+ ':<input type="text" size="20" id="campo' + nextinput + '"&nbsp; name="campo' + nextinput + '"&nbsp; /></li>';
+                    // the alert method displays the result of the toString method of the passed object
+                  compromisos++;
+                 $("#comp").append('<div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title"> '+compromisos+". "+sel);
+            } 
+            else {
+                if (document.selection) {   // Internet Explorer before version 9
+                  compromisos++;
+                    var textRange = document.selection.createRange ();
+                    $("#comp").append('<div class="alert alert-info alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title"> '+compromisos+". "+sel);
+                }
+            }
+        }
+        function GetSelectedTextAcu () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                acuerdos++;
+                 $("#acuerdo").append('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title">'+acuerdos+". "+sel);
+            } 
+            else {
+                if (document.selection) {   // Internet Explorer before version 9
+                    var textRange = document.selection.createRange ();
+                    acuerdos++;
+                    $("#acuerdo").append('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title">'+acuerdos+". "+sel);
+                }
+            }
+        }
+        function GetSelectedTextDude () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                dudas++;
+                 $("#dudas").append('<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title">'+dudas+". "+sel);
+            } 
+            else {
+                if (document.selection) {   // Internet Explorer before version 9
+                    var textRange = document.selection.createRange ();
+                      dudas++;
+                    $("#dudas").append('<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title">'+dudas+". "+sel);
+                }
+            }
+        }
+        function GetSelectedTextDesacu () {
+            if (document.getSelection) {    // all browsers, except IE before version 9
+                var sel = document.getSelection ();
+                 desacuerdos++;
+                 $("#desacuerdos").append('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title">'+desacuerdos+". "+sel);
+            } 
+            else {
+                if (document.selection) {   // Internet Explorer before version 9
+                    var textRange = document.selection.createRange ();
+                    desacuerdos++;
+                    $("#desacuerdos").append('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><img src="img/d-user.jpg" alt="" class="circle adaptarImg"><span class="title">'+desacuerdos+". "+sel);
+                }
+            }
+        }
+
+
+      
+
+    (function ($, window) {
+
+        $.fn.contextMenu = function (settings) {
+
+            return this.each(function () {
+
+                // Open context menu
+                $(this).on("contextmenu", function (e) {
+                    // return native menu if pressing control
+                    if (e.ctrlKey) return;
+                    
+                    //open menu
+                    $(settings.menuSelector)
+                        .data("invokedOn", $(e.target))
+                        .show()
+                        .css({
+                            position: "absolute",
+                            left: getMenuPosition(e.clientX, 'width', 'scrollLeft'),
+                            top: getMenuPosition(e.clientY, 'height', 'scrollTop')
+                        })
+                        .off('click')
+                        .on('click', function (e) {
+                            $(this).hide();
+                    
+                            var $invokedOn = $(this).data("invokedOn");
+                            var $selectedMenu = $(e.target);
+                            
+                            settings.menuSelected.call(this, $invokedOn, $selectedMenu);
+                    });
+                    
+                    return false;
+                });
+
+                //make sure menu closes on any click
+                $(document).click(function () {
+                    $(settings.menuSelector).hide();
+                });
+            });
+            
+            function getMenuPosition(mouse, direction, scrollDir) {
+                var win = $(window)[direction](),
+                    scroll = $(window)[scrollDir](),
+                    menu = $(settings.menuSelector)[direction](),
+                    position = mouse + scroll;
+                            
+                // opening menu would pass the side of the page
+                if (mouse + menu > win && menu < mouse) 
+                    position -= menu;
+                
+                return position;
+            }    
+
+        };
+    })(jQuery, window);
+
+    $("#inputText").contextMenu({
+        menuSelector: "#contextMenu",
+        menuSelected: function (invokedOn, selectedMenu) {
+              var msg = "You selected the menu item '" + selectedMenu.text() +
+              "' on the value '" + invokedOn.text() + "'";
+             
+
+
+
+        }
+    });
+
+
+</script>
+<script>
+  var editors = [];
+
+  $('.ewrapper').each(function(idx, wrapper) {
+    var e = new wysihtml5.Editor($(wrapper).find('.editable').get(0), {
+      toolbar:        $(wrapper).find('.toolbar').get(0),
+      parserRules:    wysihtml5ParserRules,
+      pasteParserRulesets: wysihtml5ParserPasteRulesets
+      //showToolbarAfterInit: false
+    });
+    editors.push(e);
+    
+    e.on("showSource", function() {
+      alert(e.getValue(true));
+    });
+    
+  });
+      $('.button-collapse').sideNav({
+                  menuWidth: 300, // Default is 240
+                  edge: 'right', // Choose the horizontal origin
+                  closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                }
+              );
+
+</script>
+</body>
+</html>
